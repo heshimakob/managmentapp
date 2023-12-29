@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const bcrypt=require(bcryptjs)
+const bcrypt = require('bcryptjs');
 
 
 const userSchema=mongoose.Schema({
@@ -7,13 +7,16 @@ const userSchema=mongoose.Schema({
         type:String,
         required:[true, "please ass name"]
     },
-    email:{
-        type:String,
-        required:[true, "add email"],
-        unique:true,
-        trim:true,
-        match:[ /^([a-zA-Z0-9_-.]+)@([a-zA-Z0-9_-.]+).([a-zA-Z]{2,5})$/, "add valid email" ] 
-    },
+    email: {
+        type: String,
+        required: [true, "Veuillez ajouter un email"],
+        unique: true,
+        trim: true,
+        match: [
+       ,
+        "Veuillez ajouter une adresse email valide"
+        ]
+        },
     password:{
 
         type:String,
