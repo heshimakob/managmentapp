@@ -2,7 +2,8 @@ const dotenv= require("dotenv").config();
 const mongoose=require("mongoose");
 const cors =require("cors");
 const express=require("express");
-const bodyParser=require("body-parser")
+const bodyParser=require("body-parser");
+const cookieParser= require("cookie-parser")
 
 //routes  frontend initialize importation
 const userRoute=require("./routes/userRoute")
@@ -15,8 +16,10 @@ const app =express();
 //middleware
 
 app.use(express.json());
-app.use(express.urlencoded({extended:false}))
-app.use(bodyParser.json())
+app.use(express.urlencoded({extended:false}));
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(cors());
 
 //route middleware 
 
