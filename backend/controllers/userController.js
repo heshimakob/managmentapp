@@ -225,7 +225,38 @@ const updateUser=asyncHandler(async(req,res)=>{
 //update password function
 
 const changePassword=asyncHandler(async(req,res)=>{
-  res.send("update password")
+const user = await User.findById(req.user._id);
+
+
+const {oldPassword,password}=req.body;
+if(!user){
+  res.status(400)
+  throw new Error("user not found ")
+}
+
+
+//verifier and validate password
+if(!oldPassword || !password){
+  res.status(400)
+  throw new Error("password incorrect")
+}
+//check if password is correct 
+const passwordIsCorrect= await bcrypt.compare(oldPassword, user.password);
+
+// save new password 
+
+if(user && passwordIsCorrect){
+
+  user.password=password
+  await user.save()
+  res.status(200).send("password change successfully")
+}else{
+  res.status(400)
+  throw new Error("old password is incorrect")
+}
+
+});
+const forgotPassword=asyncHandler(async(res,req)=>{
 
 })
 module.exports = {
@@ -236,4 +267,5 @@ module.exports = {
   loginStatus,
   updateUser,
   changePassword,
+  forgotPassword,
 };
